@@ -147,6 +147,70 @@
     }
   ];
 
+  const exploreCategories = [
+    'Recommended',
+    'Men\'s Shorts',
+    'Jerseys',
+    'Women\'s Bags',
+    'Men\'s Bags',
+    'Swimming, Diving & Water Sports',
+    'E-Scooter & E-E'
+  ];
+
+  const exploreProducts = [
+    {
+      id: 1,
+      name: 'Men\'s Clothing Washed Old...',
+      price: '$40.81',
+      originalPrice: '$58.70',
+      sold: '135 sold',
+      rating: 5,
+      image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=300&h=300&fit=crop',
+      badge: 'Lightning deal | Ending...'
+    },
+    {
+      id: 2,
+      name: 'Women\'s Clothing Style New...',
+      price: '$12.77',
+      originalPrice: '$31.70',
+      sold: '240 sold',
+      rating: 5,
+      image: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=300&h=300&fit=crop',
+      badge: 'LIGHTNING DEAL Limited time offer'
+    },
+    {
+      id: 3,
+      name: 'Women\'s Clothing Muslim A...',
+      price: '$28.71',
+      originalPrice: '$51.40',
+      sold: '575 sold',
+      rating: 5,
+      image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300&h=300&fit=crop'
+    },
+    {
+      id: 4,
+      name: 'Women\'s Sleepwears Sexy Fl...',
+      price: '$12.34',
+      originalPrice: '$23.82',
+      sold: '458 sold',
+      rating: 5,
+      image: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=300&h=300&fit=crop',
+      badge: 'LIGHTNING DEAL Limited time offer'
+    },
+    {
+      id: 5,
+      name: 'Women\'s Clothing Flower',
+      price: '$8.74',
+      originalPrice: '$22.42',
+      sold: '436 sold',
+      rating: 5,
+      image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=300&h=300&fit=crop',
+      badge: 'LIGHTNING DEAL Limited time'
+    }
+  ];
+
+  let selectedCategory = 'Recommended';
+
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
   }
@@ -179,6 +243,7 @@
 <svelte:head>
   <title>Voghion US | Online Shopping for Fashion & Lifestyle</title>
   <meta name="description" content="Shop the latest fashion trends, accessories, and lifestyle products at Voghion. Free shipping & Exclusive coupons." />
+  <script src="https://cdn.tailwindcss.com"></script>
 </svelte:head>
 
 <div class="app">
@@ -376,6 +441,105 @@
       </div>
     </section>
 
+    <section class="bg-white py-10">
+      <div class="max-w-7xl mx-auto px-5">
+        <!-- Summer Sale Banner -->
+        <div class="text-center mb-6">
+          <div class="inline-flex items-center gap-2 mb-4">
+            <span class="text-2xl">⭐</span>
+            <span class="text-blue-500 font-bold text-xl">Summer</span>
+            <span class="text-yellow-500 font-bold text-xl">Sale</span>
+            <span class="text-2xl">🌴</span>
+          </div>
+          <h2 class="text-3xl font-bold text-gray-800">EXPLORE YOUR INTERESTS</h2>
+        </div>
+
+        <!-- Category Navigation -->
+        <div class="flex items-center gap-4 mb-8 overflow-x-auto pb-2">
+          {#each exploreCategories as category}
+            <button 
+              class="px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors duration-200 {selectedCategory === category ? 'bg-blue-500 text-white border-2 border-blue-500' : 'text-gray-500 hover:text-gray-700'}"
+              on:click={() => selectedCategory = category}
+            >
+              {category}
+            </button>
+          {/each}
+          <button class="text-gray-400 hover:text-gray-600">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          {#each exploreProducts as product}
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200">
+              <!-- Product Image -->
+              <div class="relative">
+                <img src={product.image} alt={product.name} class="w-full h-48 object-cover" />
+                {#if product.badge}
+                  <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-blue-500 to-yellow-500 text-white text-xs font-semibold px-2 py-1 text-center">
+                    {product.badge}
+                  </div>
+                {/if}
+                <!-- Shopping Cart Icon -->
+                <div class="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md">
+                  <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Product Info -->
+              <div class="p-3">
+                <h3 class="text-sm font-medium text-gray-800 mb-2 line-clamp-2">{product.name}</h3>
+                
+                <!-- Price -->
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-lg font-bold text-red-500">{product.price}</span>
+                  <span class="text-sm text-gray-500 line-through">{product.originalPrice}</span>
+                </div>
+
+                <!-- Sales Info -->
+                <p class="text-xs text-gray-500 mb-2">{product.sold}</p>
+
+                <!-- Rating -->
+                <div class="flex items-center mb-2">
+                  {#each Array(product.rating) as _, i}
+                    <svg class="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                  {/each}
+                </div>
+              </div>
+            </div>
+          {/each}
+        </div>
+      </div>
+
+      <!-- Floating Navigation Icons -->
+      <div class="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 flex flex-col gap-3">
+        <button class="bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-shadow duration-200">
+          <span class="text-2xl">🐕</span>
+        </button>
+        <button class="bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-shadow duration-200">
+          <span class="text-2xl">🚲</span>
+        </button>
+        <button class="bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-shadow duration-200">
+          <span class="text-2xl">🛴</span>
+        </button>
+        <button class="bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-shadow duration-200">
+          <div class="flex flex-col items-center">
+            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+            </svg>
+            <span class="text-xs text-gray-600 mt-1">Top</span>
+          </div>
+        </button>
+      </div>
+    </section>
+
     <section class="new-arrivals-section">
       <div class="container">
         <div class="two-column-layout">
@@ -427,76 +591,76 @@
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>Company info</h3>
-          <ul>
-            <li><a href="/about">About Voghion</a></li>
-            <li><a href="/affiliate">Voghion Affiliate Program</a></li>
-            <li><a href="/blog">Voghion Blog</a></li>
-            <li><a href="/imprint">Imprint</a></li>
+  <footer class="bg-gray-900 text-white py-10">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-white">Company info</h3>
+          <ul class="space-y-2">
+            <li><a href="/about" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">About Voghion</a></li>
+            <li><a href="/affiliate" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">Voghion Affiliate Program</a></li>
+            <li><a href="/blog" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">Voghion Blog</a></li>
+            <li><a href="/imprint" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">Imprint</a></li>
           </ul>
         </div>
 
-        <div class="footer-section">
-          <h3>Customer Service</h3>
-          <ul>
-            <li><a href="/contact">Contact us</a></li>
-            <li><a href="/shipping">Shipping Policy</a></li>
-            <li><a href="/returns">Return Policy</a></li>
-            <li><a href="/refund">Refund Policy</a></li>
-            <li><a href="/ip-policy">Intellectual Property Policy</a></li>
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-white">Customer Service</h3>
+          <ul class="space-y-2">
+            <li><a href="/contact" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">Contact us</a></li>
+            <li><a href="/shipping" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">Shipping Policy</a></li>
+            <li><a href="/returns" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">Return Policy</a></li>
+            <li><a href="/refund" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">Refund Policy</a></li>
+            <li><a href="/ip-policy" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">Intellectual Property Policy</a></li>
           </ul>
         </div>
 
-        <div class="footer-section">
-          <h3>Help & Support</h3>
-          <ul>
-            <li><a href="/coupon">Voghion Coupon</a></li>
-            <li><a href="/support">Support Center & FAQ</a></li>
-            <li><a href="/payment">Payment Method</a></li>
-            <li><a href="/student">Student Discount</a></li>
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-white">Help & Support</h3>
+          <ul class="space-y-2">
+            <li><a href="/coupon" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">Voghion Coupon</a></li>
+            <li><a href="/support" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">Support Center & FAQ</a></li>
+            <li><a href="/payment" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">Payment Method</a></li>
+            <li><a href="/student" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">Student Discount</a></li>
           </ul>
         </div>
 
-        <div class="footer-section">
-          <h3>Connect with Voghion</h3>
-          <div class="social-links">
-            <a href="#" aria-label="Instagram">📷</a>
-            <a href="#" aria-label="TikTok">🎵</a>
-            <a href="#" aria-label="Facebook">📘</a>
-            <a href="#" aria-label="Pinterest">📌</a>
-            <a href="#" aria-label="Discord">💬</a>
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-white">Connect with Voghion</h3>
+          <div class="flex space-x-4">
+            <a href="#" aria-label="Instagram" class="text-2xl hover:scale-110 transition-transform duration-200">📷</a>
+            <a href="#" aria-label="TikTok" class="text-2xl hover:scale-110 transition-transform duration-200">🎵</a>
+            <a href="#" aria-label="Facebook" class="text-2xl hover:scale-110 transition-transform duration-200">📘</a>
+            <a href="#" aria-label="Pinterest" class="text-2xl hover:scale-110 transition-transform duration-200">📌</a>
+            <a href="#" aria-label="Discord" class="text-2xl hover:scale-110 transition-transform duration-200">💬</a>
           </div>
         </div>
       </div>
 
-      <div class="payment-section">
-        <h3>WE ACCEPT</h3>
-        <div class="payment-methods">
-          <img src="https://via.placeholder.com/40x25/0070BA/FFFFFF?text=PP" alt="PayPal" />
-          <img src="https://via.placeholder.com/40x25/1A1F71/FFFFFF?text=VISA" alt="Visa" />
-          <img src="https://via.placeholder.com/40x25/EB001B/FFFFFF?text=MC" alt="Mastercard" />
-          <img src="https://via.placeholder.com/40x25/006FCF/FFFFFF?text=AMEX" alt="American Express" />
-          <img src="https://via.placeholder.com/40x25/00A1F1/FFFFFF?text=JCB" alt="JCB" />
-          <img src="https://via.placeholder.com/40x25/00A3E0/FFFFFF?text=UP" alt="UnionPay" />
+      <div class="border-t border-gray-700 pt-6 mb-6">
+        <h3 class="text-sm font-semibold mb-3 text-white">WE ACCEPT</h3>
+        <div class="flex flex-wrap gap-3">
+          <img src="https://via.placeholder.com/40x25/0070BA/FFFFFF?text=PP" alt="PayPal" class="h-6 rounded" />
+          <img src="https://via.placeholder.com/40x25/1A1F71/FFFFFF?text=VISA" alt="Visa" class="h-6 rounded" />
+          <img src="https://via.placeholder.com/40x25/EB001B/FFFFFF?text=MC" alt="Mastercard" class="h-6 rounded" />
+          <img src="https://via.placeholder.com/40x25/006FCF/FFFFFF?text=AMEX" alt="American Express" class="h-6 rounded" />
+          <img src="https://via.placeholder.com/40x25/00A1F1/FFFFFF?text=JCB" alt="JCB" class="h-6 rounded" />
+          <img src="https://via.placeholder.com/40x25/00A3E0/FFFFFF?text=UP" alt="UnionPay" class="h-6 rounded" />
         </div>
       </div>
 
-      <div class="trustpilot-section">
-        <div class="trustpilot-widget">
-          <span>Our customers say Great ⭐⭐⭐⭐⭐ 4.3 out of 5 based on 6,260 reviews</span>
-          <img src="https://via.placeholder.com/100x30/00B67A/FFFFFF?text=Trustpilot" alt="Trustpilot" />
+      <div class="text-center mb-6">
+        <div class="flex items-center justify-center space-x-4 text-sm">
+          <span class="text-gray-300">Our customers say Great ⭐⭐⭐⭐⭐ 4.3 out of 5 based on 6,260 reviews</span>
+          <img src="https://via.placeholder.com/100x30/00B67A/FFFFFF?text=Trustpilot" alt="Trustpilot" class="h-8" />
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <p>@ 2025 Voghion</p>
-        <div class="legal-links">
-          <a href="/privacy">Privacy & cookie policy</a>
-          <a href="/terms">Terms & Conditions</a>
+      <div class="border-t border-gray-700 pt-4 flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
+        <p class="text-xs text-gray-400">@ 2025 Voghion</p>
+        <div class="flex space-x-4">
+          <a href="/privacy" class="text-xs text-gray-400 hover:text-white transition-colors duration-200">Privacy & cookie policy</a>
+          <a href="/terms" class="text-xs text-gray-400 hover:text-white transition-colors duration-200">Terms & Conditions</a>
         </div>
       </div>
     </div>
@@ -1122,112 +1286,7 @@
     margin-left: 6px;
   }
 
-  .footer {
-    background: #333;
-    color: white;
-    padding: 40px 0 20px;
-  }
 
-  .footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
-    margin-bottom: 30px;
-  }
-
-  .footer-section h3 {
-    font-size: 16px;
-    margin-bottom: 15px;
-    color: white;
-  }
-
-  .footer-section ul {
-    list-style: none;
-  }
-
-  .footer-section ul li {
-    margin-bottom: 6px;
-  }
-
-  .footer-section ul li a {
-    color: #ccc;
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.2s;
-  }
-
-  .footer-section ul li a:hover {
-    color: white;
-  }
-
-  .social-links {
-    display: flex;
-    gap: 15px;
-  }
-
-  .social-links a {
-    font-size: 20px;
-    text-decoration: none;
-  }
-
-  .payment-section {
-    border-top: 1px solid #555;
-    padding-top: 20px;
-    margin-bottom: 20px;
-  }
-
-  .payment-section h3 {
-    font-size: 14px;
-    margin-bottom: 10px;
-    color: white;
-  }
-
-  .payment-methods {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .payment-methods img {
-    height: 25px;
-    border-radius: 4px;
-  }
-
-  .trustpilot-section {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .trustpilot-widget {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    font-size: 14px;
-  }
-
-  .footer-bottom {
-    border-top: 1px solid #555;
-    padding-top: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-  }
-
-  .legal-links {
-    display: flex;
-    gap: 15px;
-  }
-
-  .legal-links a {
-    color: #ccc;
-    text-decoration: none;
-  }
-
-  .legal-links a:hover {
-    color: white;
-  }
 
   @media (max-width: 768px) {
     .header-info {
@@ -1271,10 +1330,6 @@
       gap: 30px;
     }
 
-    .footer-bottom {
-      flex-direction: column;
-      gap: 10px;
-      text-align: center;
-    }
+
   }
 </style>
